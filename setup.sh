@@ -1,5 +1,14 @@
 #!/bin/bash
 
+cp .env.example .env
+
+# Install gemini cli
+brew install gemini-cli
+
+# Install npm and npx
+brew install node
+npm install -g npx
+
 # Install python uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
 

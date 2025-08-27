@@ -17,9 +17,12 @@
             ],
             "env": {}
         },
-        "atlassian-mcp":{ 
-            "url": "https://mcp.atlassian.com/v1/sse",
-            "type": "http"
+        "atlassian-mcp": {
+            "command": "npx",
+                "args": [
+                    "mcp-remote",
+                    "https://mcp.atlassian.com/v1/sse"
+                ]
         }
     }
 }

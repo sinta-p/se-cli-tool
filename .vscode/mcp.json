@@ -11,7 +11,11 @@
 		"atlassian-mcp": {
 			"url": "https://mcp.atlassian.com/v1/sse",
 			"type": "http"
-		}
+		},
+        "datadog-mcp": {
+            "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+            "type": "http"
+        }
 	},
 	"inputs": []
 }

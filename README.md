@@ -23,6 +23,8 @@ Benefits include:
 
 ## Setup Instructions
 
+Run ```./setup.sh``` and follow instructions for each MCP Server.
+
 ### 1. Install Gemini CLI
 
 - Download Gemini CLI from the official repository or package manager.
@@ -42,7 +44,8 @@ Benefits include:
 
 ### 3. Configure MCP Servers
 
-- **Datadog MCP**: Provide Datadog API credentials and endpoint. This MCP Server use Remote MCP managed by Datadog, so no setup required.
+- **Datadog MCP**:
+  From "Remote Datadog MCP Server Preview", there is Remote Datadog MCP Server Available, but 
 
 - **Google Workspace MCP**: Authenticate with Google Workspace and grant necessary permissions.
   Google Workspace MCP Server from https://github.com/taylorwilsdon/google_workspace_mcp
