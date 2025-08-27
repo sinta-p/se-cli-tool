@@ -42,11 +42,41 @@ Benefits include:
 
 ### 3. Configure MCP Servers
 
-- **Datadog MCP**: Provide Datadog API credentials and endpoint.
+- **Datadog MCP**: Provide Datadog API credentials and endpoint. This MCP Server use Remote MCP managed by Datadog, so no setup required.
+
 - **Google Workspace MCP**: Authenticate with Google Workspace and grant necessary permissions.
+  Google Workspace MCP Server from https://github.com/taylorwilsdon/google_workspace_mcp
+  This MCP support OAuth 2.1 for multi-users. I've setup Google OAuth credentials in datadog GCP project, you can find it [here](https://datadoghq.atlassian.net/wiki/spaces/~712020036112df689a4cd7808db39dca576b4c/pages/5442273839/AI+Agent+MCP+Servers#Credentials)
+
+  Pre-requisites:
+  - python3
+  - Get [Google OAuth credentials](https://datadoghq.atlassian.net/wiki/spaces/~712020036112df689a4cd7808db39dca576b4c/pages/5442273839/AI+Agent+MCP+Servers#Credentials), and save to .env file (GOOGLE_OAUTH_CLIENT_ID and GOOGLE_OAUTH_CLIENT_SECRET)
+  - install uv and uvx to run mcp server (auto-run from settings.json mcp config file, mcp type = command). https://docs.astral.sh/uv/getting-started/installation/
+    ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+
+    Test quick-start with uvx
+    ```bash
+    uvx workspace-mcp
+    ```
+
 - **Atlassian MCP**: Connect to Jira/Confluence with API tokens or OAuth.
+  Atlassian MCP setup guide: https://support.atlassian.com/rovo/docs/getting-started-with-the-atlassian-remote-mcp-server/
+
 
 For reference, `.gemini/settings.json` is provided as an example configuration file for MCP servers. You can use it to specify server endpoints, authentication details, and integration options for Datadog, Google Workspace, and Atlassian MCP.
+
+### 4. Run GEMINI CLI
+
+You can just run ```gemini```, Gemini CLI automatic load .env, .gemini/settings.json, and GEMINI.md file for setting and credentials.
+
+```bash
+gemini
+```
+
+References:
+- https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/configuration.md#available-settings-in-settingsjson
 
 ## Troubleshooting Common Setup Issues
 
@@ -115,8 +145,6 @@ https://docs.astral.sh/uv/getting-started/installation/#installation-methods
 UV venv
 https://docs.astral.sh/uv/pip/environments/
 
-notes
-sudo chown nuttee.jirattivongvibul /Users/nuttee.jirattivongvibul/.local/share
 
 
 https://github.com/taylorwilsdon/google_workspace_mcp
