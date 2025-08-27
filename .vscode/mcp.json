@@ -1,0 +1,17 @@
+{
+	"servers": {
+		"workspace-mcp": {
+			"command": "uvx",
+			"args": [
+				"workspace-mcp"
+			],
+			"envFile": "${workspaceFolder}/.env",
+			"type": "stdio"
+		},
+		"atlassian-mcp": {
+			"url": "https://mcp.atlassian.com/v1/sse",
+			"type": "http"
+		}
+	},
+	"inputs": []
+}
