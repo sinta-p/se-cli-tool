@@ -23,7 +23,14 @@ Benefits include:
 
 ## Setup Instructions
 
-Run ```./setup.sh``` and follow instructions for each MCP Server.
+### TLDR;
+
+- Run ```./setup.sh``` to install gemini cli, datadog mcp cli, uvx, npx
+- Run a command to create ```.env``` file from [this page](https://datadoghq.atlassian.net/wiki/x/L4JiRAE)
+- Run ```gemini```
+  ```bash
+  gemini
+  ```
 
 ### 1. Install Gemini CLI
 
