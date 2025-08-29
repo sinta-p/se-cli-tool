@@ -2,6 +2,23 @@
 
 This guide is intended for Datadog Sales Engineers to set up and use Gemini CLI (or other agent CLI) with MCP Servers, including Datadog MCP, Google Workspace MCP, and Atlassian MCP. It covers installation, configuration, troubleshooting, and practical workflows for sales engineering.
 
+## Quick Start
+
+1. Clone this git repo
+   ```bash
+   git clone https://github.com/nuttea/se-ai-agent-mcp-examples.git
+   ```
+2. Run ```setup.sh```
+   ```bash
+   ./setup.sh
+   ```
+3. Update ```.env``` file
+   ex. copy pre-filled from [this page](https://datadoghq.atlassian.net/wiki/x/L4JiRAE)
+4. Run ```gemini``` or start Copilot in VSCode with Agent mode
+   ```bash
+   gemini
+   ```
+
 ## Overview of Gemini CLI and MCP Architecture
 
 Gemini CLI is a command-line interface that acts as an agent, connecting to Model Context Protocol (MCP) servers. MCP servers serve as bridges to external platforms, enabling automation, document processing, and workflow integration. The architecture allows users to:
@@ -108,7 +125,7 @@ gemini --yolo -i "$(cat <<EOF
 You are my Sales Engineer assistant. My google workspace email is ${GWS_EMAIL}.
 Help me write a summary of my current week sales engineer activities, includings Discovery Calls, Demo Sessions, POV support session, etc.
 
-Make it concise and use data from Google Calendar, Google Drive Activities, and other data that you see fits.
+Make it concise and use data from workspace-mcp tools, includings Google Calendar, Google Drive Activities, and other data that you see fits.
 
 Group summary by Customer Name and sort by date.
 
