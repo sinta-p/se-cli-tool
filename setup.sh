@@ -13,7 +13,7 @@ npm install -g npx
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Install datadog mcp cli
-curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
-chmod 755 ~/.local/bin/datadog_mcp_cli
+#curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
+#chmod 755 ~/.local/bin/datadog_mcp_cli
 
-datadog_mcp_cli login
+#datadog_mcp_cli login

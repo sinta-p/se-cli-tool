@@ -52,7 +52,9 @@ Benefits include:
 ### 3. Configure MCP Servers
 
 - **Datadog MCP**:
-  From "Remote Datadog MCP Server Preview", there is Remote Datadog MCP Server Available, but 
+  From "Remote Datadog MCP Server Preview", there is Remote Datadog MCP Server Available. Example remote MCP Server:
+  ```json
+  ```
 
 - **Google Workspace MCP**: Authenticate with Google Workspace and grant necessary permissions.
   Google Workspace MCP Server from https://github.com/taylorwilsdon/google_workspace_mcp
@@ -97,6 +99,25 @@ References:
 - **Integration Failures**: Confirm that MCP servers are running and accessible.
 
 ## Example Workflows for Sales Engineers
+
+### SE Activities Summary
+
+```bash
+GWS_EMAIL="<YOUR-GWS-EMAIL>"
+gemini --yolo -i "$(cat <<EOF
+You are my Sales Engineer assistant. My google workspace email is ${GWS_EMAIL}.
+Help me write a summary of my current week sales engineer activities, includings Discovery Calls, Demo Sessions, POV support session, etc.
+
+Make it concise and use data from Google Calendar, Google Drive Activities, and other data that you see fits.
+
+Group summary by Customer Name and sort by date.
+
+Additional rules:
+- searching for all of my calendar events
+- includes Google Drive Files with my recent access or activities in the time periods
+EOF
+)"
+```
 
 ### Customer Onboarding
 
