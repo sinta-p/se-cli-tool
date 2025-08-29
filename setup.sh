@@ -4,6 +4,7 @@ cp .env.example .env
 
 # Install gemini cli
 brew install gemini-cli
+brew link --overwrite gemini-cli
 
 # Install npm and npx
 brew install node

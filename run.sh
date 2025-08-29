@@ -6,7 +6,7 @@
 # Source .env file if it exists
 if [ -f ".env" ]; then
     echo "Loading environment variables from .env file..."
-    source .env
+    export $(grep -v '^#' .env | xargs)
 else
     echo "No .env file found, continuing without it..."
 fi
