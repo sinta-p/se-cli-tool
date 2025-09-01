@@ -1,9 +1,17 @@
 {
+    "context": {
+    "fileName": ["GEMINI.md"],
+    "fileFiltering": {
+      "respectGitIgnore": true
+    }
+  },
+  "privacy": {"usageStatisticsEnabled": false},
     "mcpServers": {
         "workspace-mcp": {
             "command": "uvx",
             "args": [
-                "workspace-mcp"
+                "workspace-mcp",
+                "--single-user"
             ],
             "envFile": "${workspaceFolder}/.env",
             "type": "stdio"

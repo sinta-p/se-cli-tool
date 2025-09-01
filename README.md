@@ -5,19 +5,36 @@ This guide is intended for Datadog Sales Engineers to set up and use Gemini CLI 
 ## Quick Start
 
 1. Clone this git repo
-   ```bash
-   git clone https://github.com/nuttea/se-ai-agent-mcp-examples.git
-   ```
+    ```bash
+    git clone https://github.com/nuttea/se-ai-agent-mcp-examples.git
+    ```
 2. Run ```setup.sh```
-   ```bash
-   ./setup.sh
-   ```
+    ```bash
+    ./setup.sh
+    ```
 3. Update ```.env``` file
    ex. copy pre-filled from [this page](https://datadoghq.atlassian.net/wiki/x/L4JiRAE)
 4. Run ```gemini``` or start Copilot in VSCode with Agent mode
-   ```bash
-   gemini
-   ```
+    ```bash
+    gemini
+    ```
+5. Test with example SE Activities Summary prompt
+    ```bash
+    GWS_EMAIL="<YOUR-GWS-EMAIL>"
+    gemini --yolo -i "$(cat <<EOF
+    You are my Sales Engineer assistant. My google workspace email is ${GWS_EMAIL}.
+    Help me write a summary of my current week sales engineer activities, includings Discovery Calls, Demo Sessions, POV support session, etc.
+
+    Make it concise and use data from workspace-mcp MCP Server, includings Google Calendar, Google Drive Activities, and other data that you see fits.
+
+    Group summary by Customer Name and sort by date.
+
+    Additional rules:
+    - searching for all of my calendar events
+    - includes Google Drive Files with my recent access or activities in the time periods
+    EOF
+    )"
+    ```
 
 ## Overview of Gemini CLI and MCP Architecture
 
@@ -120,18 +137,70 @@ References:
 ### SE Activities Summary
 
 ```bash
-GWS_EMAIL="<YOUR-GWS-EMAIL>"
+export USER_GOOGLE_EMAIL="<YOUR-GWS-EMAIL>"
+export FILE_1="$(cat templates/se_activities_report.md)"
+
 gemini --yolo -i "$(cat <<EOF
-You are my Sales Engineer assistant. My google workspace email is ${GWS_EMAIL}.
-Help me write a summary of my current week sales engineer activities, includings Discovery Calls, Demo Sessions, POV support session, etc.
+Generate a sales engineer activity report for me for the current full week from Monday to Friday.
 
-Make it concise and use data from workspace-mcp tools, includings Google Calendar, Google Drive Activities, and other data that you see fits.
+INSTRUCTIONS:
+- Include all customer-facing events from my Google Calendar, Google Tasks, such as Discovery Calls, Demos, and POC sessions. If you see any calendar events with Company Name, consider as engagement activities.
+- Try to derive my activities from my recent access to Google Drive Files or recent modified files during this period. 
+- Write the reports with human readable and easy to understand format. You may focus on what happened?, what already done, pending tasks that need to do, or any risks to be raised to internal team.
+- The report should be grouped by customer name, with activities sorted chronologically.
+- Don't use GoogleSearch.
+- Save the report as a markdown file in the temp directory. file naming could be <first_name>_<week_dates>_activities_report.md
 
-Group summary by Customer Name and sort by date.
+<REPORT_EXAMPLE>
+${FILE_1}
+</REPORT_EXAMPLE>
+EOF
+)"
+```
 
-Additional rules:
-- searching for all of my calendar events
-- includes Google Drive Files with my recent access or activities in the time periods
+### Customer Onboarding
+
+Ex1. customer implement DBM for SQL Server, and would like to have suggestion for Monitoring setup
+
+```bash
+gemini --yolo -i "$(cat <<EOF
+Help me research and find recommends Monitor setup for Datadog DBM for SQL Server.
+
+You can use data source for research from atlassian-mcp, datadog-mcp ask_docs, or GoogleSearch Tool.
+EOF
+)"
+```
+
+Ex2. General Datadog feature questions
+
+```bash
+gemini --yolo -i "$(cat <<EOF
+with Datadog LLM Observability, I have my custom allm model typhoon-2, how can I define my model tokens price?
+EOF
+)"
+```
+
+### RFP Verification
+
+1. Work on RFP requirements.
+2. Use Datadog MCP `ask_docs` to verify answers and generate reference links.
+3. Compile responses and supporting documentation for submission.
+
+Example scenario, Customer shared RFP for Infra and Web App Monitoring project in google sheet https://docs.google.com/spreadsheets/d/13MY894dwjBECiVM4P_8bgP4U5YdTo3NBXc_EybFcrVY/edit?usp=sharing
+
+```bash
+export GWS_EMAIL="<YOUR-GWS-EMAIL>"
+export SHEET_ID="13MY894dwjBECiVM4P_8bgP4U5YdTo3NBXc_EybFcrVY"
+
+gemini --yolo -i "$(cat <<EOF
+My google workspace email is ${GWS_EMAIL}.
+
+You are a Sales Engineer expert. Help me read a RFP from google sheet id ${SHEET_ID}.
+
+You will be tasked for:
+- Analyse all RFP requirements and use Datadog MCP Server ask_docs to help building answers comply statement for Datadog Solutions and Product. Also provide source reference in columns "Comply Statement" and "Reference / Grounding Source".
+- After finish building the answers, you must do fact-check and verdict to make sure all statements are correct and be true for Datadog Solutions. You can use Google Search or Grounding with Google Search to help with this task, and pus results in "Fact-Check and Verdict" column.
+
 EOF
 )"
 ```
@@ -147,12 +216,6 @@ EOF
 1. Discover customer environment (system, OS, app framework, database version).
 2. Use Gemini CLI with Datadog MCP to generate installation steps and commands for each component.
 3. Present automated documentation to the customer.
-
-### RFP Verification
-
-1. Work on RFP requirements.
-2. Use Datadog MCP `ask_docs` to verify answers and generate reference links.
-3. Compile responses and supporting documentation for submission.
 
 ## Tips for Customizing Agent Prompts and Automations
 

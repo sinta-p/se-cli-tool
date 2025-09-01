@@ -3,7 +3,8 @@
 		"workspace-mcp": {
 			"command": "uvx",
 			"args": [
-				"workspace-mcp"
+				"workspace-mcp",
+				"--single-user"
 			],
 			"envFile": "${workspaceFolder}/.env",
 			"type": "stdio"
