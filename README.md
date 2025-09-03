@@ -6,7 +6,7 @@ This guide is intended for Datadog Sales Engineers to set up and use Gemini CLI 
 
 1. Clone this git repo
     ```bash
-    git clone https://github.com/nuttea/se-ai-agent-mcp-examples.git
+    git clone https://github.com/DataDog/nuttee-se-gemini-cli.git
     ```
 2. Run ```setup.sh```
     ```bash
