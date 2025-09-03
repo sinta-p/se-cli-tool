@@ -1,11 +1,11 @@
 {
     "context": {
-    "fileName": ["GEMINI.md"],
-    "fileFiltering": {
-      "respectGitIgnore": true
-    }
-  },
-  "privacy": {"usageStatisticsEnabled": false},
+        "fileName": ["GEMINI.md"],
+        "fileFiltering": {
+        "respectGitIgnore": false
+        }
+    },
+    "privacy": {"usageStatisticsEnabled": false},
     "mcpServers": {
         "workspace-mcp": {
             "command": "uvx",

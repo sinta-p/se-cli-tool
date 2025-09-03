@@ -1,0 +1,22 @@
+preferred_auth_method = "apikey"
+disable_response_storage = true
+
+# IMPORTANT: the top-level key is `mcp_servers` rather than `mcpServers`.
+[mcp_servers.workspace-mcp]
+command = "uvx"
+args = ["workspace-mcp", "--single-user"]
+envFile = "./.env"
+
+[mcp_servers.datadog-mcp]
+command = "npx"
+args = [
+        "mcp-remote",
+        "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+    ]
+
+[mcp_servers.atlassian-mcp]
+command = "npx"
+args = [
+        "mcp-remote",
+        "https://mcp.atlassian.com/v1/sse"
+    ]
