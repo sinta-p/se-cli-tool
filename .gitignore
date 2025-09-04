@@ -6,7 +6,6 @@
 # Local Temp Directories
 tmp/
 temp/
-temp*/
 temp_working/
 
 # Byte-compiled / optimized / DLL files

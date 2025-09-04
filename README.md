@@ -20,18 +20,23 @@ This guide is intended for Datadog Sales Engineers to set up and use Gemini CLI 
     ```
 5. Test with example SE Activities Summary prompt
     ```bash
-    GWS_EMAIL="<YOUR-GWS-EMAIL>"
+    export USER_GOOGLE_EMAIL="<YOUR-GWS-EMAIL>"
+    export FILE_1="$(cat templates/se_activities_report.md)"
+
     gemini --yolo -i "$(cat <<EOF
-    You are my Sales Engineer assistant. My google workspace email is ${GWS_EMAIL}.
-    Help me write a summary of my current week sales engineer activities, includings Discovery Calls, Demo Sessions, POV support session, etc.
+    Generate a sales engineer activity report for me for the current full week from Monday to Friday.
 
-    Make it concise and use data from workspace-mcp MCP Server, includings Google Calendar, Google Drive Activities, and other data that you see fits.
+    INSTRUCTIONS:
+    - Include all customer-facing events from my Google Calendar, Google Tasks, such as Discovery Calls, Demos, and POC sessions. If you see any calendar events with Company Name, consider as engagement activities.
+    - Try to derive my activities from my recent access to Google Drive Files or recent modified files during this period. 
+    - Write the reports with human readable and easy to understand format. You may focus on what happened?, what already done, pending tasks that need to do, or any risks to be raised to internal team.
+    - The report should be grouped by customer name, with activities sorted chronologically.
+    - Don't use GoogleSearch.
+    - Save the report as a markdown file in the temp directory. file naming could be <first_name>_<week_dates>_activities_report.md
 
-    Group summary by Customer Name and sort by date.
-
-    Additional rules:
-    - searching for all of my calendar events
-    - includes Google Drive Files with my recent access or activities in the time periods
+    <REPORT_EXAMPLE>
+    ${FILE_1}
+    </REPORT_EXAMPLE>
     EOF
     )"
     ```
@@ -57,21 +62,13 @@ Benefits include:
 
 ## Setup Instructions
 
-### TLDR;
-
-- Run ```./setup.sh``` to install gemini cli, datadog mcp cli, uvx, npx
-- Run a command to create ```.env``` file from [this page](https://datadoghq.atlassian.net/wiki/x/L4JiRAE)
-- Run ```gemini```
-  ```bash
-  gemini
-  ```
-
 ### 1. Install Gemini CLI
 
 - Download Gemini CLI from the official repository or package manager.
   Ex. Install globally with Homebrew (macOS/Linux)
   ```bash
   brew install gemini-cli
+  brew link --overwrite gemini-cli
   ```
 - Follow installation instructions for your operating system (Windows, macOS, Linux).
 - Verify installation by running `gemini --version`.
@@ -87,7 +84,32 @@ Benefits include:
 
 - **Datadog MCP**:
   From "Remote Datadog MCP Server Preview", there is Remote Datadog MCP Server Available. Example remote MCP Server:
+
+  for Gemini CLI (.gemini/settings.json) (use npx mcp-remote connecting to Datadog Remote MCP Server)
   ```json
+  {
+      "mcpServers": {
+          "datadog-mcp": {
+              "command": "npx",
+                  "args": [
+                      "mcp-remote",
+                      "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+                  ]
+          }
+      }
+  }
+  ```
+
+  for Copilot (.vscode/mcp.json)
+  ```json
+  {
+	"servers": {
+      "datadog-mcp": {
+          "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+          "type": "http"
+      }
+    }
+  }
   ```
 
 - **Google Workspace MCP**: Authenticate with Google Workspace and grant necessary permissions.
@@ -160,7 +182,31 @@ EOF
 
 ### Customer Onboarding
 
-Ex1. customer implement DBM for SQL Server, and would like to have suggestion for Monitoring setup
+1. Receive customer requirements (PDF, screencapture, or document).
+2. Use Gemini CLI to extract and summarize requirements.
+3. Draft POV Success Criteria documents and save to Google Sheets via Google Workspace MCP.
+
+Ex1. Customer share requirements Diagram Board.
+
+```bash
+gemini --yolo -i "$(cat <<EOF
+You are the Datadog Sales Engineer expert. Supporting a customer evaluate Datadog products.
+
+Read imgage @assets/example_requirements_image.png which is a diagram from my customer asking for DevSecOps evaluation with Datadog team. Customer's requirements are in BLUE boxes
+
+Your tasks:
+1. Read and make understanding and analysis of the requirements 
+2. Expand to the requirements and functionality and write out for details features and functionalities required on each item.
+3. Use Datadog MCP ask_docs to research for building the answers Datadog Security Products that meet the requirements. Write to details Datadog capability and also provide reference links from ask_docs. 4. Re-check all answers for accuracy, you may use Google Search to help verify and give verdicts.
+5. Re-analyze overall information that you have built so far, and give a suggestion for any improvements before we can share this response to the customer.
+6. Implement final improvements that you suggest and write the documents out to temp directory in Markdown format. You can suggest the filename.
+7. Create a Google Sheet with final output information.
+
+EOF
+)"
+```
+
+Ex2. customer implement DBM for SQL Server, and would like to have suggestion for Monitoring setup
 
 ```bash
 gemini --yolo -i "$(cat <<EOF
@@ -171,7 +217,7 @@ EOF
 )"
 ```
 
-Ex2. General Datadog feature questions
+Ex3. General Datadog feature questions
 
 ```bash
 gemini --yolo -i "$(cat <<EOF
@@ -205,12 +251,6 @@ EOF
 )"
 ```
 
-### Customer Onboarding
-
-1. Receive customer requirements (PDF, screencapture, or document).
-2. Use Gemini CLI to extract and summarize requirements.
-3. Draft POV Success Criteria documents and save to Google Sheets via Google Workspace MCP.
-
 ### Demo Scenarios
 
 1. Discover customer environment (system, OS, app framework, database version).
@@ -238,14 +278,9 @@ A: Refer to the official documentation for integration steps or contact internal
 **Q: Can I automate document generation for multiple customers?**
 A: Yes, use batch processing features in Gemini CLI and configure MCP integrations for each customer.
 
-## Links to Official Documentation and Support
+## References
 
-- [Gemini CLI Documentation](https://github.com/google/gemini-cli)
-- [Datadog MCP Docs](https://docs.datadoghq.com)
-- [Google Workspace MCP Docs](https://workspace.google.com)
-- [Atlassian MCP Docs](https://atlassian.com)
-- Internal support: #sales-engineer Slack channel
-References:
+Gemini API
 https://github.com/google-gemini/gemini-cli/blob/main/docs/tos-privacy.md
 https://ai.google.dev/gemini-api/docs/rate-limits
 
@@ -256,10 +291,9 @@ https://docs.astral.sh/uv/getting-started/installation/#installation-methods
 UV venv
 https://docs.astral.sh/uv/pip/environments/
 
-
-
+Workspace MCP
 https://github.com/taylorwilsdon/google_workspace_mcp
 https://workspacemcp.com/
 
-
+Atlassian MCP
 https://support.atlassian.com/rovo/docs/getting-started-with-the-atlassian-remote-mcp-server/
