@@ -2,6 +2,26 @@
 
 This guide is intended for Datadog Sales Engineers to set up and use Gemini CLI (or other agent CLI) with MCP Servers, including Datadog MCP, Google Workspace MCP, and Atlassian MCP. It covers installation, configuration, troubleshooting, and practical workflows for sales engineering.
 
+- [Gemini CLI + MCP Server Guide](#gemini-cli--mcp-server-guide)
+  - [Quick Start](#quick-start)
+  - [Overview of Gemini CLI and MCP Architecture](#overview-of-gemini-cli-and-mcp-architecture)
+  - [Supported MCP Integrations and Their Benefits](#supported-mcp-integrations-and-their-benefits)
+  - [Setup Instructions](#setup-instructions)
+    - [1. Install Gemini CLI](#1-install-gemini-cli)
+    - [2. Obtain GEMINI API Key](#2-obtain-gemini-api-key)
+    - [3. Configure MCP Servers](#3-configure-mcp-servers)
+    - [4. Run GEMINI CLI](#4-run-gemini-cli)
+  - [Troubleshooting Common Setup Issues](#troubleshooting-common-setup-issues)
+  - [Example Workflows for Sales Engineers](#example-workflows-for-sales-engineers)
+    - [SE Activities Summary](#se-activities-summary)
+    - [Customer Onboarding](#customer-onboarding)
+    - [RFP Verification](#rfp-verification)
+    - [Demo Scenarios](#demo-scenarios)
+  - [Tips for Customizing Agent Prompts and Automations](#tips-for-customizing-agent-prompts-and-automations)
+  - [FAQ](#faq)
+  - [References](#references)
+
+
 ## Quick Start
 
 1. Clone this git repo
