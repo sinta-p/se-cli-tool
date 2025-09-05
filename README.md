@@ -26,7 +26,7 @@ This guide is intended for Sales Engineers to set up and use Gemini CLI (or othe
 
 1. Clone this git repo
     ```bash
-    git clone https://github.com/DataDog/nuttee-se-gemini-cli.git
+    git clone https://github.com/sinta-p/se-cli-tool.git
     ```
 2. Run ```setup.sh```
     ```bash
