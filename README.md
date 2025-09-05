@@ -1,6 +1,6 @@
 # Gemini CLI + MCP Server Guide
 
-This guide is intended for Datadog Sales Engineers to set up and use Gemini CLI (or other agent CLI) with MCP Servers, including Datadog MCP, Google Workspace MCP, and Atlassian MCP. It covers installation, configuration, troubleshooting, and practical workflows for sales engineering.
+This guide is intended for Sales Engineers to set up and use Gemini CLI (or other agent CLI) with MCP Servers, including Datadog MCP, Google Workspace MCP, and Atlassian MCP. It covers installation, configuration, troubleshooting, and practical workflows for sales engineering.
 
 - [Gemini CLI + MCP Server Guide](#gemini-cli--mcp-server-guide)
   - [Quick Start](#quick-start)
